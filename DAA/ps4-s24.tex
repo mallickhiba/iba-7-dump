@@ -1,0 +1,146 @@
+\documentclass[11pt]{article}
+\usepackage{hyperref}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{epsfig}
+
+\newcommand{\handout}[5]{
+  \noindent
+  \begin{center}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { {\bf CSE 317 Design and Analysis of Algorithms } \hfill #2 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #5  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { {\em #3 \hfill #4} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcommand{\lecture}[4]{\handout{#1}{#2}{#3}{#4}{#1}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{assumption}[theorem]{Assumption}
+
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+
+\parindent 0in
+\parskip 1.5ex
+%\renewcommand{\baselinestretch}{1.25}
+
+\begin{document}
+
+\lecture{Problem Set 4}{\textit{Assigned: Sunday, 14 Apr}}{Spring 2024}{Due: \textit{11:59 pm Monday,  Apr 29}}
+
+\centerline{{\Large To facilitate grading and timely feedback}}
+\centerline{{\Large please note that all submissions are through \href{http://gradescope.com}{Gradescope}.}}
+\centerline{}
+\centerline{{\Large Solve each problem on a new page and put your name on each page.}}
+
+\centerline{{\Large You MUST typeset your solutions using \LaTeX and correctly link}}
+\centerline{{\Large solutions on Gradescope.}}
+\begin{enumerate}
+
+\item IBA has $n$ courses. In order to graduate, a
+student must satisfy several requirements. Each requirement is of the form ``you must
+take at least $k_i$ courses from subset $S_i$''. The problem is to determine whether or not
+a given student can graduate. The hard part is that any given course cannot be used
+towards satisfying multiple requirements. For example if one requirement states that
+you must take at least two courses from $\{A,B,C\}$, and a second requirement states
+that you must take at least two courses from $\{C,D,E\}$, then a student who had taken
+just $\{B,C,D\}$ would not yet be able to graduate.
+
+Your job is to give a polynomial-time algorithm for the following problem. Given a
+list of requirements $r_1, r_2, \cdots, r_m$ (where each requirement $r_i$ is of the form: ``you must
+take at least $k_i$ courses from set $S_i$''), and given a list $L$ of courses taken by some
+student, determine if that student can graduate.
+
+Specifically, show how this can be reduced to the network flow problem. Make sure to
+prove that your reduction is correct.
+
+\item You just realize that homework in your Zombie Algorithms class is due soon, and you really need to get cracking. There are $n$
+concepts, each quite technical, where concept $i$ costs $C_i$ to understand. (``Time is money," as they say.)
+
+The homework consists of a set of $m$ problems $p_1, p_2, \ldots ,p_m$. For each problem $p_j$ , there is a subset $P_j \subseteq \{ 1, \ldots, n\}$ of the concepts that it depends on. If you understand all the
+concepts in $P_j$ you can solve the problem $p_j$ , but if you've missed even one of the concepts in $P_j$ you cannot solve the problem. Solving $p_j$ gives you $V_j$ dollars of value. The net utility is the value of the problems solved minus the cost concepts understood. The goal
+is to find a subset $R \subseteq \{ 1, \ldots, n\}$ of the concepts to understand, to maximize the net utility you get.
+
+For example, if $P_1 = \{2, 3, 5\}, P_2 = \{1, 2, 3\}$ and $P_3 = \{2, 3, 4\}$. Suppose the costs for the $n = 5$ concepts are $1, 4, 3, 8, 1$ respectively, and values for the three problems are $V_1 = 14, V_2 =
+4, V_3 = 7$. If you have understood concepts $\{2, 3, 4, 5\}$ then your cost is $4 + 3 + 8 + 1 = 16$ and the value you get from having solved $P_1$ and $P_3$ is $14 + 7 = 21$. So the net utility is $21 - 16 = 5$.
+On the other hand, having understood just $2, 3, 5$ you'd have net utility $14 - (4 + 3 + 1) = 6$. And having understood just $1, 2$ you'd get net utility $0 - (1 + 4) = -5$.
+
+Show how to use an $s$-$t$-min-cut algorithm to solve this problem in polynomial time.
+
+Hint: Can you solve the problem of \emph{minimizing} the cost of the concepts you understand plus the sum of the values of problems you \emph{did not} solve. Why is solving this problem useful? Think about how you could solve this problem using an $s$-$t$-min-cut algorithm.
+
+\item Write down the dual of the following linear programs. Clearly identify the new objective function, variables and constraints.
+\begin{alignat*}{2}
+\max & (x_1 + 3x_2  - 2  x_3) & \\
+\textrm{such that } & x_1 + x_2 + 2x_3  & \leq   2\\
+& 7x_1 + 2x_2 + 5x_3 &\leq 6 \\
+& 2x_1 + x_2 - x_3 & \leq 1\\
+& x_1, x_2, x_3 &\geq 0
+\end{alignat*}
+\begin{alignat*}{2}
+\max & (x_1 - 3x_2  +2  x_3) & \\
+\textrm{such that } & 3x_1 + 2x_3   & \geq   2\\
+& 2x_2 - x_3 &\leq 5 \\
+& x_1, x_2, x_3 &\geq 0
+\end{alignat*}
+
+
+\item Consider the joint conditional probability distribution $p_{ab|xy}$ where $a,b,x,y$ are all bits $\{0,1\}$. Apart from the following standard probability constraints,
+\begin{align*}
+p_{ab|xy} &\geq 0 \quad \textrm{Positivity} \\
+\sum_{a,b} p_{ab|xy} &= 1 \quad \textrm{Normalization},
+\end{align*}
+we have these additional constraints
+\begin{align*}
+\sum_{a}p_{ab|xy} &= \sum_{a}p_{ab|x'y} \textrm{ for all } b,x,x',y, \\
+\sum_{b}p_{ab|xy} &= \sum_{b}p_{ab|xy'} \textrm{ for all } a,x,y,y'. 
+\end{align*}
+Note that these are not just two equalities, but a family of constraints based on choices of $a,b,x$ and $y$. For example, one constraint in this family is given by
+\begin{equation*}
+p_{00|00} + p_{01|00} = p_{00|01} + p_{01|01}.
+\end{equation*}
+Since all the constraints are linear, we know the feasible region is a polyhedron. Your task is to identify the equivalent dual representation of this region in terms of its vertices. You may use any computational package to aid in this task. Some possible programs are \href{https://porta.zib.de}{Porta} and \href{https://people.inf.ethz.ch/fukudak/cdd_home/}{cdd}. Your solution should first identify the total number of vertices of the region followed by one line for each vertex using the following ordering.
+\begin{alignat*}{15}
+p_{00|00} &\,
+p_{01|00} &\,
+p_{10|00} &\,
+p_{11|00} &\,
+p_{00|01} &\,
+p_{01|01} &\,
+p_{10|01} &\,
+p_{11|01} &\,
+p_{00|10} &\,
+p_{01|10} &\,
+p_{10|10} &\,
+p_{11|10} &\,
+p_{00|11} &\,
+p_{01|11} &\,
+p_{10|11} &\,
+p_{11|11} 
+\end{alignat*}
+
+\end{enumerate}
+\end{document}

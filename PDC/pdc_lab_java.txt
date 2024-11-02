@@ -1,0 +1,64 @@
+public class Main {
+public static void main(String[] args) {
+    int size = 100;
+
+    System.out.println("ROW MAJOR LOOP");
+
+    int[][] M2 = new int[size][size];
+    int[][] M3 = new int[size][size];
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            M2[i][j] = 2;
+            M3[i][j] = 3;
+        }
+    }
+
+    int[][] M1 = new int[size][size];
+
+    long t1 = System.nanoTime();
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            M1[i][j] = M2[i][j] + M3[i][j];
+        }
+    }
+
+    long t2 = System.nanoTime();
+    double timeElapsed = (double) (t2 - t1) / 1000000000;
+    System.out.println("Time elapsed: " + timeElapsed + " seconds");
+}
+}
+
+
+##### COLUMN MAJOR
+
+public class Main {
+public static void main(String[] args) {
+    int size = 100;
+
+    System.out.println("COLUMN MAJOR LOOP");
+    long t1 = System.nanoTime();
+    int[][] M2 = new int[size][size];
+    int[][] M3 = new int[size][size];
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            M2[i][j] = 2;
+            M3[i][j] = 3;
+        }
+    }
+
+    int[][] M1 = new int[size][size];
+
+    for (int j = 0; j < size; j++) { //column major
+        for (int i = 0; i < size; i++) {
+            M1[i][j] = M2[i][j] + M3[i][j];
+        }
+    }
+    long t2 = System.nanoTime();
+    double sec = 1000000000;
+    double timeElapsed = (t2 - t1) / sec;
+    System.out.println("Time elapsed: " + timeElapsed + " seconds");
+}
+}
